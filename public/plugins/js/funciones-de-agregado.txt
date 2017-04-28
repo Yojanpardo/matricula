@@ -1,0 +1,29 @@
+select count (cod_aula) cod_aula
+from profesor
+group by cod_aula
+
+select count (cod_libro), profesor.id_profesor
+from profesor_libro, profesor
+where profesor_libro.id_profesor=profesor.id_profesor
+group by profesor_libro.cod_libro, profesor.id_profesor
+
+select count (cod_libro), profesor.id_profesor
+from profesor_libro, profesor
+group by profesor_libro.cod_libro, profesor.id_profesor
+having count (cod_libro)>1
+
+select count (cod_libro), profesor.id_profesor
+from profesor_libro, profesor
+group by profesor_libro.cod_libro, profesor.id_profesor
+having count (cod_libro)=0
+
+select count (cod_libro), profesor.id_profesor, profesor.nom_profesor
+from profesor_libro, profesor
+group by profesor_libro.cod_libro, profesor.id_profesor
+having count (cod_libro)=0
+
+alter table profesor add column sueldo integer
+
+select (cod_aula), SUM (profesor.sueldo)
+from profesor
+group by cod_aula
